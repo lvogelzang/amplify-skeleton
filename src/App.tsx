@@ -1,3 +1,4 @@
+import { Button, Card, Collection, Heading } from "@aws-amplify/ui-react"
 import { generateClient } from "aws-amplify/data"
 import { useEffect, useState } from "react"
 import type { Schema } from "../amplify/data/resource"
@@ -19,18 +20,15 @@ function App() {
 
     return (
         <main>
-            <h1>My todos</h1>
-            <button onClick={createTodo}>+ new</button>
-            <ul>
-                {todos.map((todo) => (
-                    <li key={todo.id}>{todo.content}</li>
-                ))}
-            </ul>
-            <div>
-                🥳 App successfully hosted. Try creating a new todo.
-                <br />
-                <a href="https://docs.amplify.aws/react/start/quickstart/#make-frontend-updates">Review next step of this tutorial.</a>
-            </div>
+            <Heading level={1}>My todos</Heading>
+            <Button onClick={createTodo}>+ new</Button>
+            <Collection items={todos} type="list" direction="column" gap="20px" wrap="nowrap">
+                {(todo, index) => (
+                    <Card key={index} borderRadius="medium" maxWidth="20rem" variation="outlined">
+                        {todo.content}
+                    </Card>
+                )}
+            </Collection>
         </main>
     )
 }
